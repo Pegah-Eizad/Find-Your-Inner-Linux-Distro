@@ -5,7 +5,6 @@ body {
 	background: url(https://cn.pling.com/img/5/e/7/8/e6e0345028b3680aa9111641396473420f5e.png) no-repeat;
 	background-size: cover;
 }
-
 /* text editor styles */
 .text-editor-wrap {
   display: block;
@@ -23,13 +22,15 @@ body {
   -o-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
   }
-
-.name{
-    color: #f0f0f0;  
-    font-family: "Consolas", "Courier New", "Courier";
-  }
-
-.title-bar {
+  .name{
+    margin: 0 auto;
+    color: #f0f0f0;/* border-right: 2px solid rgba(255,255,255,.75); */
+    font-size: 110%;font-family: "Consolas", "Courier New", "Courier";
+    white-space: nowrap; 
+    overflow: hidden; 
+    transform: translateY(-50%); 
+}
+  .title-bar {
   padding: 5px 0;
   font-family: "Lucida Grande", sans-serif;
   font-size: 0.75em;
@@ -50,20 +51,24 @@ body {
     width: 24em;
     margin: 0 auto;
     color: #f0f0f0;
-    border-right: 2px solid rgba(255,255,255,.75);
+    /*border-right: 2px solid rgba(255,255,255,.75);*/
     font-size: 110%;
     font-family: "Consolas", "Courier New", "Courier";
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
     transform: translateY(-50%);
-}
 
-/* Animation */
-.anim-typewriter{
-  animation: typewriter 1s steps(90) 1s 1 normal both,
+    animation: typewriter 1s steps(90) 1s 1 normal both,
              blinkTextCursor 500ms steps(90) infinite normal;
 }
+
+/* Animation 
+.anim-typewriter{
+  
+}
+*/
+/*
 @keyframes typewriter{
   from{width: 0;}
   to{width: 24em;}
@@ -72,19 +77,15 @@ body {
   from{border-right-color: rgba(255,255,255,.75);}
   to{border-right-color: transparent;}
 }
-
+*/
 .user-feedback{
-
-    color: #f0f0f0;  
-    font-family: "Consolas", "Courier New", "Courier";
-
     position: relative;
     display: inline-block;
     top: 16px;  
     width: 24em;
     margin: 0 auto;
     color: #f0f0f0;
-    border-right: 2px solid rgba(255,255,255,.75);
+    /*border-right: 2px solid rgba(255,255,255,.75);*/
     font-size: 110%;
     font-family: "Consolas", "Courier New", "Courier";
     text-align: left;
@@ -92,8 +93,8 @@ body {
     overflow: hidden;
     transform: translateY(-50%);
 
-      animation: typewriter 1s steps(90) 1s 1 normal both,
-             blinkTextCursor 500ms steps(90) infinite normal;
+    animation: typewriter 1s steps(90) 1s 1 normal both,
+               blinkTextCursor 500ms steps(90) infinite normal;
 }
 @keyframes typewriter{
   from{width: 0;}
@@ -103,4 +104,26 @@ body {
   from{border-right-color: rgba(255,255,255,.75);}
   to{border-right-color: transparent;}
 
+}
+.penguin-box{
+  position: relative;
+  display: inline-block;
+  top: 400px;
+  right: -1300px;
+  width: 100px;
+  height: 100px;
+  background: grey;
+  opacity: 0.5;
+  border-radius: 30%;
+}
+.question-box{
+  position: relative;
+  display: inline-block;
+  top: 510px;
+  right: -1160px;
+  width: 100px;
+  height: 100px;
+  background: grey;
+  opacity: 0.5;
+  border-radius: 30%;
 }

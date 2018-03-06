@@ -3,11 +3,14 @@ let questionNum = 0;
 
 //intro 
 function introduceQuiz(){
-  //let feedback = 'hi'; //populate for testing
-  console.log('inside getUserAnswer');
-  //might want to change to a CSS selector rather than a jQuery object which runs in parallel
-  //with the bottom jQuery object
-  $(document).on('keypress', function (event){
+  console.log('inside introduceQuiz');
+  /*
+   $('input').keydown(event =>
+    $('.output').text(`Key pressed: ${event.key}`)
+  );
+  */
+
+  $('input').on('keydown', function (event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     console.log('key pressed!! ' + event.keyCode);
     if (event.which == 121 || event.which == 13){
@@ -22,7 +25,17 @@ function introduceQuiz(){
       //stop
       $('.user-feedback').append('<p class="user-feedback">$ Goodbye!</p>');
     }
-    event.stopPropegation();
+    //testing
+    event.stopPropagation();
+    function propStopped( event ) {
+    var msg = "";
+    if ( event.isPropagationStopped() ) {
+      msg = "CALLED";
+    } else {
+      msg = "NOT CALLED";
+    }
+    console.log(msg);
+  }
   }); 
   //alert('Get user answer finished');
 }
@@ -35,16 +48,49 @@ function startQuiz()
     $('.user-feedback').remove();
     //$('p.questions').removeClass('start-quiz-question');
     $('.questions').remove();
+    $('input').remove();
     //move the shell up
     $('.text-editor-start').addClass('text-editor').removeClass('text-editor-start');
-    renderNextQuestion();
-    //setTimeout(function afterOneSecond(){
-       
-    //}, 1000);
+    displayQuestionAndAnswers();
+}
+
+function updateQuestionNumber(){
+  console.log('UPDATING questionNum. questionNum is: ' + questionNum + 'updating...');
+  questionNum++;
+  console.log('new questionNum is: ' + questionNum);
+}
+
+function renderNextQuestion(){
+  console.log('inside renderNextQuestion');
+  //event.preventDefault();
+  //$(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
+  /*
+  $('form').on('Submit', function(e){
+    e.preventDefault();
+    console.log('DEFAULT PREVENTED');
+  });
+  */
+  $(document).on('click','.submitButton',function(e){
+
+      e.preventDefault();
+      console.log('Default Preveted!!!!!');
+      updateQuestionNumber();
+      displayQuestionAndAnswers();
+
+});
+    
+}
+
+function displayQuestionAndAnswers(){
+  console.log('inside displayQuestionAndAnswers');
+  generateQuestion();
+  setTimeout(function afterThreeSeconds(){
+   $('main').append(generateAnswers());
+  }, 2000);
 }
 
 function generateQuestion(){
-  console.log('testing generateQuestion');
+  console.log('testing generateQuestion with questionNUm' + questionNum);
   if (questionNum < dataArray.length) {
      //$('.questions').append(${dataArray[questionNum].question});
      $('div.text-body').append(`<p class="questions">${dataArray[questionNum].question}</p>`);
@@ -52,6 +98,7 @@ function generateQuestion(){
 }
 function generateAnswers(){
      //${STORE[questionNumber].question}
+     console.log('inside generate answers with questionnum' + questionNum);
      if (questionNum < dataArray.length) {
        return `<div class="question-${questionNum}">
        <form>
@@ -82,52 +129,10 @@ function generateAnswers(){
        </div>`;
   }
 }
-
-function updateQuestionNumber(){
-  console.log('Inside Questions num. questionNum is: ' + questionNum + 'updating...');
-  questionNum++;
-  console.log('new questionNum is: ' + questionNum);
-}
-
-function renderNextQuestion(){
-  if (questionNum === 0){
-    console.log('inside renderNextQuestion with questionNum 0');
-    displayQuestionAndAnswers();
-  }
-  else{
-    console.log('inside renderNextQuestion and questionNum is not 0!')
-    $('.submitButton').on('click', function(event){
-      updateQuestionNumber();
-         displayQuestionAndAnswers();   
-    });
-}
-}
-
-function displayQuestionAndAnswers(){
-  console.log('inside displayQuestionAndAnswers');
-  propStopped();
-  generateQuestion();
-  setTimeout(function afterThreeSeconds(){
-   $('main').append(generateAnswers());
-  }, 3000);
-}
-
-function propStopped( event ) {
-  var msg = "";
-  if ( event.isPropagationStopped() ) {
-    msg = "called";
-  } else {
-    msg = "not called";
-  }
-  console.log(msg);
-}
 //Create Quiz
-function quizApp(){
+$(document).ready(function(){
   console.log('inside quizApp.');
-  //get user answer
   introduceQuiz();
-}
-
-$(quizApp);
-
-
+  renderNextQuestion();
+  //get user answer 
+});

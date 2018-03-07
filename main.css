@@ -78,7 +78,7 @@ main{
     overflow: hidden; 
     transform: translateY(-50%); 
 }
-  .title-bar {
+ .title-bar {
   padding: 5px 0;
   font-family: "Lucida Grande", sans-serif;
   font-size: 0.75em;
@@ -91,39 +91,31 @@ main{
   box-shadow: inset rgba(255, 255, 255, 0.7) 0px 1px 1px;
   border-bottom: #6a6a6a 1px solid; 
 }
+.questions, .user-feedback, .answerChoice{
+  position: relative;
+  top: 16px;  
+  width: 24em;
+  color: #f0f0f0;
+  font-size: 110%;
+  font-family: "Consolas", "Courier New", "Courier";
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  transform: translateY(-50%);
+}
 .questions, .user-feedback{
-    position: relative;
+         animation: typewriter 1s steps(90) 1s 1 normal both,
+         blinkTextCursor 500ms steps(90) infinite normal;
+}
+.questions, .answerChoice{ 
     display: inline-block;
-    top: 16px;  
-    width: 24em;
     margin: 0 auto;
-    color: #f0f0f0;
-    /*border-right: 2px solid rgba(255,255,255,.75);*/
-    font-size: 110%;
-    font-family: "Consolas", "Courier New", "Courier";
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    transform: translateY(-50%);
+}
+.user-feedback{
+    display: block;
+    margin: 0 0;
+}
 
-    animation: typewriter 1s steps(90) 1s 1 normal both,
-             blinkTextCursor 500ms steps(90) infinite normal;
-}
-.answerChoice{
-    position: relative;
-    display: inline-block;
-    top: 16px;  
-    width: 24em;
-    margin: 0 auto;
-    color: #f0f0f0;
-    /*border-right: 2px solid rgba(255,255,255,.75);*/
-    font-size: 110%;
-    font-family: "Consolas", "Courier New", "Courier";
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    transform: translateY(-50%);
-}
 /*type-writer animation media queries*/
 @keyframes typewriter{
   from{width: 0;}

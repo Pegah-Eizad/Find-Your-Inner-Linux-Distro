@@ -15,7 +15,7 @@ function introduceQuiz(){
     console.log('key pressed!! ' + event.keyCode);
     if (event.which == 121 || event.which == 13){
       console.log('it worked');
-      $('.user-feedback').append('<p class="user-feedback">$ Let\'s Go!</p>');
+      $('.text-body').append('<p class="user-feedback">$ Let\'s Go!</p>');
       //call start quiz since user said yes
       setTimeout(function afterTwoSeconds(){
        startQuiz();
@@ -23,7 +23,7 @@ function introduceQuiz(){
     }
     else{
       //stop
-      $('.user-feedback').append('<p class="user-feedback">$ Goodbye!</p>');
+      $('.text-body').append('<p class="user-feedback">$ Goodbye!</p>');
     }
     //testing
     event.stopPropagation();
@@ -39,7 +39,6 @@ function introduceQuiz(){
   }); 
   //alert('Get user answer finished');
 }
-
 
 function startQuiz()
 {   
@@ -62,23 +61,14 @@ function updateQuestionNumber(){
 
 function renderNextQuestion(){
   console.log('inside renderNextQuestion');
-  //event.preventDefault();
-  //$(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
-  /*
-  $('form').on('Submit', function(e){
-    e.preventDefault();
-    console.log('DEFAULT PREVENTED');
-  });
-  */
   $(document).on('click','.submitButton',function(e){
-
-      e.preventDefault();
-      console.log('Default Preveted!!!!!');
-      updateQuestionNumber();
-      displayQuestionAndAnswers();
-
-});
-    
+    e.preventDefault();
+    console.log('Default Preveted!!!!!');
+    $('.questions').remove();
+    $('.answers').remove();
+    updateQuestionNumber();
+    displayQuestionAndAnswers();
+}); 
 }
 
 function displayQuestionAndAnswers(){
@@ -100,7 +90,7 @@ function generateAnswers(){
      //${STORE[questionNumber].question}
      console.log('inside generate answers with questionnum' + questionNum);
      if (questionNum < dataArray.length) {
-       return `<div class="question-${questionNum}">
+       return `<div class="answers">
        <form>
        <fieldset>
        <label class="answerChoice">

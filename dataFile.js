@@ -70,8 +70,33 @@ const dataArray = [
             }
     ], 
     feedback: 'feedback', 
-    icon: 'https://i.imgur.com/iQ0FBhB.png', 
     alt: 'shield for 10 essentials icon' 
-  } 
-
+  },
+      { 
+      question: 'Are you a programmer, or do you do anything else involving code?', 
+      answers: [
+            { 
+              text: 'I am the most dangerous hacking ninja in my town', 
+               weight: 5
+            },
+            {
+               text:'I program in my sleep, I like it so much.', 
+               weight: 2
+            },
+            {
+               text: 'Yes, I have coded some, but mostly for the web pages and for the odd shell script', 
+               weight: 7
+            },
+            {
+               text: 'Only when I absolutely have to', 
+               weight: 4
+            },
+            {
+               text: 'Programming? I thought software grew on trees' ,
+               weight: 8
+            }
+    ], 
+    feedback: 'feedback', 
+    alt: 'shield for 10 essentials icon' 
+  }
 ];

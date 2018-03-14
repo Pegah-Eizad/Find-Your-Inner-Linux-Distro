@@ -32,18 +32,36 @@ main{
   grid-row-start: 2;
   grid-row-end: 3; 
 }
+/*
+p{
+  border-right: 2px solid rgba(255,255,255,.75);
+}
+*/
+input[name=user-input]{
+   width: 20px;
+   background: rgb(56,56,56);
+   border:  none;
+   color: white;
+   outline: none;
+  }  
+
+  .text-editor-start, .text-editor{
+    animation: float 6s ease-in-out infinite;
+  }
 /*text editor styling*/
 .text-editor-start{
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 2;
-  grid-row-end: 3; 
+  grid-row-end: 3;
   display: block;
   position: relative;
+  /*width: 50%;*/
   height: 50%;
+  /*margin: auto;*/
   border-radius: 10px;
   background: rgb(56,56,56);
-  box-shadow: rgba(0, 0, 0, 0.8) 0px 20px 70px;
+  box-shadow: rgba(235, 230, 255, 0.8) 0px 0px 200px;
   clear: both;
   overflow: hidden;
   -webkit-transition: all 0.5s ease-out;
@@ -61,7 +79,7 @@ main{
   position: relative;
   border-radius: 10px;
   background: rgb(56,56,56);
-  box-shadow: rgba(0, 0, 0, 0.8) 0px 20px 70px;
+  box-shadow: rgba(235, 230, 255, 0.8) 0px 0px 200px;
   clear: both;
   overflow: hidden;
   -webkit-transition: all 0.5s ease-out;
@@ -72,7 +90,7 @@ main{
   }
   .type-writer-constant-texts{
     margin: 0 auto;
-    color: #f0f0f0;/* border-right: 2px solid rgba(255,255,255,.75); */
+    color: #f0f0f0; 
     font-size: 110%;font-family: "Consolas", "Courier New", "Courier";
     white-space: nowrap; 
     overflow: hidden; 
@@ -94,7 +112,7 @@ main{
 .questions, .user-feedback, .answerChoice{
   position: relative;
   top: 16px;  
-  width: 24em;
+  width: 24.92em;
   color: #f0f0f0;
   font-size: 110%;
   font-family: "Consolas", "Courier New", "Courier";
@@ -104,47 +122,78 @@ main{
   transform: translateY(-50%);
 }
 .questions, .user-feedback{
-         animation: typewriter 1s steps(90) 1s 1 normal both,
-         blinkTextCursor 500ms steps(90) infinite normal;
+         /*animation: typewriter 1s steps(90) 1s 1 normal both,
+         blinkTextCursor 500ms steps(90) 5 normal;*/
+         animation: typewriter 1s steps(40, end), blinkTextCursor 500ms steps(30) 5; 
+white-space: nowrap; 
+/*border-right: .15em solid transparent;*/
 }
-.questions, .answerChoice{ 
+.questions{ 
     display: inline-block;
     margin: 0 auto;
 }
 .user-feedback{
     display: block;
+    width: 10em;
     margin: 0 0;
 }
 
+.answers{  
+  grid-column-start: 2;
+   grid-column-end: 3;
+   grid-row-start: 1;
+  grid-row-end: 2;
+  position: relative;
+  margin-top: 20px;
+  border-radius: 10px;
+   background: rgb(56,56,56);
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 20px 70px;
+  clear: both;
+ overflow: hidden;
+   -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+   transition: all 0.5s ease-out;
+ }
+ .answerChoice1, .answerChoice2, .answerChoice3, .answerChoice4, .answerChoice5{
+   grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+   display: block;
+  border-radius: 10px;
+   background: rgb(56,56,56);
+   box-shadow: rgba(0, 0, 0, 0.8) 0px 20px 70px;
+ color: white;
+  clear: both;
+  overflow: hidden;
+ }
+
+.user-answer, .answer-feedback{
+  color: white;
+}
 /*type-writer animation media queries*/
+@keyframes float {
+  0% {
+    /*box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);*/
+    transform: translatey(0px);
+  }
+  50% {
+    /*box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);*/
+    transform: translatey(-15px);
+  }
+  100% {
+    /*box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);*/
+    transform: translatey(0px);
+  }
+}
 @keyframes typewriter{
   from{width: 0;}
   to{width: 24em;}
 }
 @keyframes blinkTextCursor{
-  from{border-right-color: rgba(255,255,255,.75);}
+  from{border-right-color: rgba(255,255,255,.75); }
   to{border-right-color: transparent;}
 
-}
-.penguin-box{
-  position: relative;
-  display: inline-block;
-  top: 400px;
-  right: -1300px;
-  width: 100px;
-  height: 100px;
-  background: grey;
-  opacity: 0.5;
-  border-radius: 30%;
-}
-.question-num-box{
-  position: relative;
-  display: inline-block;
-  top: 510px;
-  right: -1160px;
-  width: 100px;
-  height: 100px;
-  background: grey;
-  opacity: 0.5;
-  border-radius: 30%;
 }

@@ -1,6 +1,45 @@
 
 let questionNum = 0;
+let quizIntroText = `Find your inner Linux distribution?[Enter]`;
+let startQuizText = `Let's Go!`;
+let goodbyeText = `Goodbye!`;
 
+function typeText(elementId, text, position, callback) {
+  console.log('inside tyepText with elementID:' + elementId);
+  console.log('inside typetext with text:' + text);
+  console.log('inside tyepText with position:' + position);
+  var element = document.getElementById(elementId);
+  // var element = $('#' + elementId);
+  var printing = text.substring(0,position);
+  element.innerHTML = printing;
+  // element.html(printing);
+  
+  if (position<text.length) {
+    window.setTimeout(function() {
+      typeText(elementId, text, position+1,callback);
+    },10);
+  } else {
+    callback();
+  }
+}
+/*
+String.prototype.type = function(elementId, position, callback) {
+  var self = this;
+  var element = document.getElementById(elementId);
+  // var element = $('#' + elementId);
+  var printing = this.substring(0,position);
+  element.innerHTML = printing;
+  // element.html(printing);
+  
+  if (position<this.length) {
+    window.setTimeout(function() {
+      self.type(elementId, position+1,callback);
+    },10);
+  } else {
+    callback();
+  }
+}
+*/
 //intro 
 function introduceQuiz(){
   console.log('inside introduceQuiz');
@@ -9,14 +48,22 @@ function introduceQuiz(){
     $('.output').text(`Key pressed: ${event.key}`)
   );
   */
+  typeText('questions', quizIntroText, 1, function(){
+    document.getElementById('readydiv').innerHTML = 'READY!!!';
+  });
+
   $('input').focus();
+
   $('input').on('keydown', function (event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     $('input').blur();
     console.log('key pressed!! ' + event.keyCode);
     if (event.which == 121 || event.which == 13){
       console.log('it worked');
-      $('.text-body').append('<p class="user-feedback">$ Let\'s Go!</p>');
+      //$('.text-body').append('<p class="user-feedback">$ Let\'s Go!</p>');
+      typeText('user-feedback', startQuizText, 0, function(){
+        console.log('inside callback function');
+      });
       //call start quiz since user said yes
       setTimeout(function afterTwoSeconds(){
        startQuiz();
@@ -24,7 +71,10 @@ function introduceQuiz(){
     }
     else{
       //stop
-      $('.text-body').append('<p class="user-feedback">$ Goodbye!</p>');
+      //$('.text-body').append('<p class="user-feedback">$ Goodbye!</p>');
+      typeText('user-feedback', goodbyeText, 0, 0, function(){
+        console.log('inside callback function');
+      });
     }
     //testing
     event.stopPropagation();
@@ -159,4 +209,3 @@ $(document).ready(function(){
   nextClick();
   //get user answer 
 });
-

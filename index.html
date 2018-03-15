@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<title>Quiz APP</title>
-	<!-- add viewport?? 
-	<meta name="viewport" content="initial-scale=1"> -->
+	
+	<meta name="viewport" content="initial-scale=1"> 
 	<!--CSS file import-->
 	<link rel="stylesheet" href="main.css">
 	<!-- CSS normalization import-->
@@ -20,11 +20,12 @@
 					<span class="type-writer-constant-texts"> Last login: Sat Feb 24 14:36:27 on tt </span>
 					<br> 
 					<span class="type-writer-constant-texts">$</span>
-					<p class="questions">Find your inner Linux distribution?[Enter]</p> 
+					<p id="questions" class="questions"></p> 
 					<input type="text" name="user-input">
-					<p class="user-feedback"></p>
+					<p id="user-feedback"></p>
 				</div>
 		</div>
+		<div id="readyDiv"></div>
     </main>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
    <!--<script src="https://code.jquery.com/jquery.min.js"></script>-->

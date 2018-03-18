@@ -1,6 +1,6 @@
 
 let questionNum = 0;
-let quizIntroText = `Find your inner Linux distribution?[Enter]`;
+let quizIntroText = `Find your inner Linux distribution?[Enter/Tap to Start]`;
 let startQuizText = `Let's Go!`;
 let goodbyeText = `Goodbye!`;
 //let x = 0;
@@ -14,7 +14,7 @@ function typeText(elementId, text, position, callback) {
       typeText(elementId, text, position+1,callback);
     },10);
   } else {
-    callback();
+    //callback();
   }
 }
 
@@ -24,15 +24,22 @@ function introduceQuiz(){
   typeText('questions', quizIntroText, 1, function(){
     document.getElementById('readyDiv').innerHTML = 'READY!!!';
   });
-
+   let triggerQuiz = true;
   $('input').focus();
+  $(document).on('keydown click', function (event){
 
-  $('input').on('keydown', function (event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
+    //console.log(keycode);
+    console.log(triggerQuiz);
+    if(event.which != 13 && event.which != 89 && event.which != 1){
+      //console.log(keycode);
+      triggerQuiz = false;
+      //console.log(triggerQuiz);
+    }
     $('input').blur();
-    console.log('key pressed!! ' + event.keyCode);
-    if (event.which == 121 || event.which == 13){
-      console.log('it worked');
+    if (triggerQuiz)
+    {
+            console.log('it worked');
       //$('.text-body').append('<p class="user-feedback">$ Let\'s Go!</p>');
       typeText('user-feedback', startQuizText, 0, function(){
         console.log('inside callback function');
@@ -55,11 +62,14 @@ function introduceQuiz(){
 function startQuiz()
 {   
     console.log('inside startQuiz');
+    $(document).unbind('keydown');
+    $(document).unbind('click');
     //clear start page 
     $('#user-feedback').remove();
     //$('p.questions').removeClass('start-quiz-question');
     $('#questions').remove();
     $('input').remove();
+    $('.start-quiz').remove();
     //move the shell up
     $('.text-editor-start').addClass('text-editor').removeClass('text-editor-start');
     renderQuestion();
@@ -76,32 +86,43 @@ function answerSubmit(){
   $(document.body).on('submit', '#question-form', function(e){
     e.preventDefault();
     console.log('Default Preveted!!!!!');
-    $('.user-answer').remove();
-    $('.answer-feedback').remove();
-    $('#questions').remove();
-    $('.answers').remove();
-    updateQuestionNumber();
-    renderQuestion();
+    giveFeedback();
+    //updateQuestionNumber();
+    //renderQuestion();
 }); 
 }
 
-function giveFeedback(id){
-  let x  = -1;
-  switch (id){
-    case 'selector0':  x=0;  break;
-    case 'selector1':  x=1; break;
-    case 'selector2':  x=2; break;
-    case 'selector3':  x=3; break;
-  }
-  $('main').append(`<div class="answer-feedback">${dataArray[questionNum].answers[x].feedback}</div>`);
+function giveFeedback(){
+  //let index = document.querySelector('input[name="answer"]:checked'.value);
+  let index = document.querySelector('input[name="answer"]:checked').value;
+  console.log('index is: ' + index);
+  $('main').append(`<div class="answer-feedback">${dataArray[questionNum].answers[index].feedback}</div>
+                    <button type="button" class="next-button"></button>`);
+}
+
+function nextClick(){
+  $(document.body).on('click', '.next-button', (event) => { 
+   clearPreviousQuestion();
+    updateQuestionNumber();
+    renderQuestion();
+  });
 }
 
 function renderQuestion(){
   console.log('inside renderQuestion');
+  //clearPreviousQuestion();
   generateQuestion();
   setTimeout(function afterOneSecond(){
    $('main').append(generateAnswers());
   }, 1200);
+}
+
+function clearPreviousQuestion(){
+    $('.user-answer').remove();
+    $('.answer-feedback').remove();
+    $('#questions').remove();
+    $('.answers').remove();
+    $('.next-button').remove();
 }
 
 function generateQuestion(){
@@ -120,21 +141,23 @@ function generateAnswers(){
      //${STORE[questionNumber].question}
      console.log('inside generate answers with questionnum' + questionNum);
      if (questionNum < dataArray.length) {
-       return `<div class="answers">
-       <form id="question-form">
-       <fieldset>   
-       <input id="selector0" type="radio" value="${dataArray[questionNum].answers[0].text}" name="answer" onClick="giveFeedback('selector0');"> 
-       <label for="selector0" class="answerChoice1"><span>${dataArray[questionNum].answers[0].text}</span></label>
-       <input id="selector1" type="radio" value="${dataArray[questionNum].answers[1].text}" name="answer" onClick="giveFeedback('selector1');">
-       <label for="selector1" class="answerChoice2"><span>${dataArray[questionNum].answers[1].text}</span></label>
-       <input id="selector2" type="radio" value="${dataArray[questionNum].answers[2].text}" name="answer" onClick="giveFeedback('selector2');">
-       <label for="selector2" class="answerChoice3"><span>${dataArray[questionNum].answers[2].text}</span></label>
-       <input id="selector3" type="radio" value="${dataArray[questionNum].answers[3].text}" name="answer" onClick="giveFeedback('selector3');">
-       <label  for="selector3" class="answerChoice4"><span>${dataArray[questionNum].answers[3].text}</span></label>
-       <button type="submit" class="submitButton">Submit</button>
-       </fieldset>
-       </form>
-       </div>`;
+       var html = `<div class="answers">
+                     <form id="question-form">
+                     <fieldset>`;
+       
+       for (var i=0; i<dataArray[questionNum].answers.length; i++) {
+         var selection = dataArray[questionNum].answers[i];
+         html += `
+          <input id="selector${i}" type="radio" value="${i}" name="answer"> 
+          <label for="selector${i}" class="answerChoice1"><span>${selection.text}</span></label>
+         `;
+       }
+       html += `<button type="submit" class="submitButton">Submit</button>
+                     </fieldset>
+                     </form>
+                     </div>`;
+       
+      return html;
   }
 
   
@@ -144,7 +167,8 @@ $(document).ready(function(){
   console.log('inside quizApp.');
   introduceQuiz();
   answerSubmit();
-  //nextClick();
+  nextClick();
   //get user answer 
 });
 
+//onClick="giveFeedback(${i});

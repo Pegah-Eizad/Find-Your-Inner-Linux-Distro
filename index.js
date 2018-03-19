@@ -1,16 +1,13 @@
-
-let questionNum = 0;
-let quizIntroText = `Find your inner Linux distribution?[Enter/Tap to Start]`;
+let quizIntroText = `$ Find your inner Linux distribution [Enter/Tap to Start]? `;
 let startQuizText = `Let's Go!`;
 let goodbyeText = `Goodbye!`;
-//let x = 0;
 
 function typeText(elementId, text, position, callback) {
   var element = document.getElementById(elementId);
   var printing = text.substring(0,position);
   element.innerHTML = printing;
   if (position<text.length) {
-    window.setTimeout(function() {
+    setTimeout(function() {
       typeText(elementId, text, position+1,callback);
     },10);
   } else {
@@ -21,31 +18,35 @@ function typeText(elementId, text, position, callback) {
 //intro 
 function introduceQuiz(){
   console.log('inside introduceQuiz');
-  typeText('questions', quizIntroText, 1, function(){
-    document.getElementById('readyDiv').innerHTML = 'READY!!!';
-  });
-   let triggerQuiz = true;
   $('input').focus();
+  window.setTimeout(function afterOneSecond(){
+    typeText('questions', quizIntroText, 1, function(){
+    //document.getElementById('readyDiv').innerHTML = 'READY!!!';
+  }), 5000});
+  // $('.text-body').append(`<input type="text" name="user-input">`);
+   let triggerQuiz = false;
+  
   $(document).on('keydown click', function (event){
 
     var keycode = (event.keyCode ? event.keyCode : event.which);
     //console.log(keycode);
     console.log(triggerQuiz);
-    if(event.which != 13 && event.which != 89 && event.which != 1){
+    if(event.which === 13 || event.which === 89 || event.which === 1){
       //console.log(keycode);
-      triggerQuiz = false;
+      triggerQuiz = true;
       //console.log(triggerQuiz);
     }
-    $('input').blur();
+    //$('input').blur();
     if (triggerQuiz)
-    {
-            console.log('it worked');
-      //$('.text-body').append('<p class="user-feedback">$ Let\'s Go!</p>');
+    { 
+      //remove tests
+      console.log('it worked');
       typeText('user-feedback', startQuizText, 0, function(){
         console.log('inside callback function');
       });
+
       //call start quiz since user said yes
-      setTimeout(function afterTwoSeconds(){
+      setTimeout(function afterOneSeconds(){
        startQuiz();
       }, 2000);
     }
@@ -71,14 +72,14 @@ function startQuiz()
     $('input').remove();
     $('.start-quiz').remove();
     //move the shell up
-    $('.text-editor-start').addClass('text-editor').removeClass('text-editor-start');
-    renderQuestion();
+    $('.console-start').addClass('console').removeClass('console-start');
+    generateQuestion();
 }
 
 function updateQuestionNumber(){
-  console.log('UPDATING questionNum. questionNum is: ' + questionNum + 'updating...');
-  questionNum++;
-  console.log('new questionNum is: ' + questionNum);
+  console.log('UPDATING model.currentQuestion. model.currentQuestion is: ' + model.currentQuestion + 'updating...');
+  model.currentQuestion++;
+  console.log('new model.currentQuestion is: ' + model.currentQuestion);
 }
 
 function answerSubmit(){
@@ -87,8 +88,7 @@ function answerSubmit(){
     e.preventDefault();
     console.log('Default Preveted!!!!!');
     giveFeedback();
-    //updateQuestionNumber();
-    //renderQuestion();
+    addWeights();
 }); 
 }
 
@@ -96,7 +96,7 @@ function giveFeedback(){
   //let index = document.querySelector('input[name="answer"]:checked'.value);
   let index = document.querySelector('input[name="answer"]:checked').value;
   console.log('index is: ' + index);
-  $('main').append(`<div class="answer-feedback">${dataArray[questionNum].answers[index].feedback}</div>
+  $('main').append(`<div class="answer-feedback">${dataArray[model.currentQuestion].answers[index].feedback}</div>
                     <button type="button" class="next-button"></button>`);
 }
 
@@ -104,17 +104,8 @@ function nextClick(){
   $(document.body).on('click', '.next-button', (event) => { 
    clearPreviousQuestion();
     updateQuestionNumber();
-    renderQuestion();
+    generateQuestion();
   });
-}
-
-function renderQuestion(){
-  console.log('inside renderQuestion');
-  //clearPreviousQuestion();
-  generateQuestion();
-  setTimeout(function afterOneSecond(){
-   $('main').append(generateAnswers());
-  }, 1200);
 }
 
 function clearPreviousQuestion(){
@@ -126,27 +117,33 @@ function clearPreviousQuestion(){
 }
 
 function generateQuestion(){
-  console.log('testing generateQuestion with questionNUm' + questionNum);
-  if (questionNum < dataArray.length) {
-     //$('.questions').append(${dataArray[questionNum].question});
+  console.log('testing generateQuestion with model.currentQuestion' + model.currentQuestion);
+  if (model.currentQuestion < dataArray.length) {
+     //$('.questions').append(${dataArray[model.currentQuestion].question});
      $('div.text-body').append(`<p id="questions"></p>`);
-     console.log(dataArray[questionNum].question);
-     typeText('questions', dataArray[questionNum].question, 0, function(){
+     console.log(dataArray[model.currentQuestion].question);
+     typeText('questions', dataArray[model.currentQuestion].question, 0, function(){
         console.log('inside callback function');
       });
+     setTimeout(function afterOneSecond(){
+       $('main').append(generateAnswers());
+     }, 1200);
+  }
+  else{
+    calculateResults();
   }
 }
 
 function generateAnswers(){
-     //${STORE[questionNumber].question}
-     console.log('inside generate answers with questionnum' + questionNum);
-     if (questionNum < dataArray.length) {
+     //${STORE[model.currentQuestionber].question}
+     console.log('inside generate answers with model.currentQuestion' + model.currentQuestion);
+
        var html = `<div class="answers">
                      <form id="question-form">
                      <fieldset>`;
        
-       for (var i=0; i<dataArray[questionNum].answers.length; i++) {
-         var selection = dataArray[questionNum].answers[i];
+       for (var i=0; i<dataArray[model.currentQuestion].answers.length; i++) {
+         var selection = dataArray[model.currentQuestion].answers[i];
          html += `
           <input id="selector${i}" type="radio" value="${i}" name="answer"> 
           <label for="selector${i}" class="answerChoice1"><span>${selection.text}</span></label>
@@ -158,9 +155,35 @@ function generateAnswers(){
                      </div>`;
        
       return html;
-  }
+}
 
-  
+function addWeights(){
+  let index = document.querySelector('input[name="answer"]:checked').value;
+  model.totalWeight += dataArray[model.currentQuestion].answers[index].weight; 
+}
+
+function calculateResults(){
+  let tw = model.totalWeight;
+  for(let i=0; i<results.length; i++){
+    if(tw >= results[i].min && tw <= results[i].max)
+     displayResults(results[i].text);
+  }
+}
+
+function displayResults(text){
+  //inside console
+  $('div.text-body').append('<p id="results"></p>');
+  typeText('results', text, 0, function(){
+    console.log('inside callback function in DISPLAYRESULTS');
+  });
+  //append restart button to main, CHECK SYNTAX
+  setTimeout(() => {$('main').append('<button type="submit" class="restart-button">restart</button>');}, 1000);
+}
+
+function optionToRestart(){
+   $(document.body).on('click', '.restart-button', function(){
+      window.location.reload(true);
+   });
 }
 //Create Quiz
 $(document).ready(function(){
@@ -168,7 +191,6 @@ $(document).ready(function(){
   introduceQuiz();
   answerSubmit();
   nextClick();
+  optionToRestart();
   //get user answer 
 });
-
-//onClick="giveFeedback(${i});

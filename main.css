@@ -47,6 +47,61 @@ input[name=user-input]{
    outline: none;
   }  
 
+  input[name=answer]{
+     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid black;
+    transition: 0.2s all linear;
+    outline: none;
+    margin-right: 5px;
+    margin-left: 5px;
+    position: relative;
+    top: 2px;
+
+  }
+
+  input:checked {
+    border: 10px solid black;
+}
+/*
+
+input[name="answer"]{
+      -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    transition: 0.2s all linear;
+    outline: none;
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+}
+
+*/
+
+input[name=user-feedback]{
+
+  display: inline-block;
+   position: absolute;
+   margin-top: 15px;
+   margin-left: 5px;
+   padding-top: 2px;
+   width: 20px;
+   background: rgb(56,56,56);
+   border:  none;
+   color: white;
+   clear: both;
+   outline: none;
+
+}
+
 /*text editor styling*/
 .console-start{
   grid-column-start: 2;
@@ -55,51 +110,60 @@ input[name=user-input]{
   grid-row-end: 3;
   display: block;
   position: relative;
-  /*width: 50%;*/
-  height: 30%;
-  /*margin: auto;*/
-  border-radius: 10px;
+  height: 60%;
+  margin-left: 5px;
+  border-radius: 8px;
   background: rgb(56,56,56);
   box-shadow: rgba(235, 230, 255, 0.8) 0px 0px 200px;
   clear: both;
-  /*overflow: hidden;*/
   -webkit-transition: all 0.5s ease-out;
   -moz-transition: all 0.5s ease-out;
   -ms-transition: all 0.5s ease-out;
   -o-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
+  animation: float 6s ease-in-out infinite;
+  img { width: 100%; height: auto; }
   }
 .console{
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
-  grid-row-end: 2; 
+  grid-row-end: 2;
   position: relative;
-  border-radius: 10px;
+  height: 40%;
+  overflow: auto;
+  border-radius: 8px;
   background: rgb(56,56,56);
   box-shadow: rgba(235, 230, 255, 0.8) 0px 0px 200px;
   clear: both;
-  /*overflow: hidden;*/
   -webkit-transition: all 0.5s ease-out;
   -moz-transition: all 0.5s ease-out;
   -ms-transition: all 0.5s ease-out;
   -o-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
+  animation: float 6s ease-in-out infinite;
+  img { width: 100%;
+  height: auto; }
   }
   .console-defaults{
-    /* display: inline; */
-    /* align-items: flex-end; */
     margin: 0;
     color: #f0f0f0;
-    font-size: 110%;
+    font-size: 120%;
     font-family: "Consolas", "Courier New", "Courier";
     clear: both;
     transform: translateY(-50%);
+    /* height: 100%; */
+    /* overflow: auto; */
 }
 
 .console-dollar-sign{
   display: inline-block;
   color: white;
+}
+
+.text-body{
+  padding-left: 10px;
+  padding-right: 10px;
 }
  .title-bar {
   padding: 5px 0;
@@ -112,13 +176,15 @@ input[name=user-input]{
   background-image: -moz-linear-gradient(top, #e8e8e8, #bcbbbc);
   background-image: linear-gradient(top, #e8e8e8, #bcbbbc);
   box-shadow: inset rgba(255, 255, 255, 0.7) 0px 1px 1px;
-  border-bottom: #6a6a6a 1px solid; 
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: #6a6a6a 1px solid;
 }
 #questions, #user-feedback, .answerChoice{
   position: relative;
   top: 16px;
   color: #f0f0f0;
-  font-size: 110%;
+  font-size: 120%;
   font-family: "Consolas", "Courier New", "Courier";
   text-align: left;
   transform: translateY(-50%);
@@ -127,67 +193,170 @@ input[name=user-input]{
 #questions{
     display: inline;
     margin: 0 auto;
-    /*overflow: hidden;*/
 }
 #user-feedback{
     display: block;
-    margin-top: 8px;
+    margin-top: 10px;
+    margin-top: 12px;
 }
 
-.answers{  
-  grid-column-start: 2;
-   grid-column-end: 3;
-   grid-row-start: 1;
-  grid-row-end: 2;
+input:checked {
+    border: px solid black;
+}
+
+.answers{
+  /* display: grid; */
+  /* grid-column-start: 2; */
+  /* grid-column-end: 3; */
+  /* grid-row-start: 1; */
+  /* grid-row-end: 2; */
   position: relative;
   margin-top: 20px;
-  border-radius: 10px;
-   background: rgb(56,56,56);
-  box-shadow: rgba(0, 0, 0, 0.8) 0px 20px 70px;
-  clear: both;
-   -webkit-transition: all 0.5s ease-out;
+  /* height: 40%; */
+  border: none;
+  -webkit-transition: all 0.5s ease-out;
   -moz-transition: all 0.5s ease-out;
   -ms-transition: all 0.5s ease-out;
   -o-transition: all 0.5s ease-out;
-   transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
  }
- .answerChoice1, .answerChoice2, .answerChoice3, .answerChoice4, .answerChoice5{
+.div0, .div1, .div2, .div3{
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+    background: rgba(128,128,128,0.65);
+    box-shadow: rgb(51, 0, 0, 0.5) 50px 50px 2000px;
+    /* height: 100%; */
+    /* width: 100%; */
+    position: relative;
+    height: 25%;
+    margin-bottom: 10px;
+    /*border-radius: 10%;*/
+    border-radius: 8px;
+}
+ .div0{
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  /* height: 100%; */
+  /* width: 100%; */
+  /* position: relative; */
+  /* height: 25%; */
+ }
+ .div1{
+
+            animation-duration: 3s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+ }
+  .div2{
+
+            animation-duration: 4s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+ }
+ .div3{
+
+            animation-duration: 5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+ }
+ .answerChoice0, .answerChoice1, .answerChoice2, .answerChoice3{
    grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
-   display: block;
-  border-radius: 10px;
-   background: rgb(56,56,56);
-   box-shadow: rgba(0, 0, 0, 0.8) 0px 20px 70px;
- color: white;
-  clear: both;
-  /*overflow: hidden;*/
+   grid-column-end: 3;
+   grid-row-start: 1;
+   grid-row-end: 2;
+   display: inline;
+   border-radius: 10px;
+   /*background: rgb(56,56,56);*/
+   /* box-shadow: rgba(0, 0, 0, 0.8) 0px 20px 70px; */
+   color: white;
+   clear: both;
+   /*position: relative;*/
+   /*top: 16px;*/
+   color: #f0f0f0;
+   font-size: 120%;
+   font-family: "Consolas", "Courier New", "Courier";
+   text-align: left;
+   /* border-radius: 10%; */
+   transform: translateY(-50%);
+   /*overflow: hidden;*/
+   /* height: 100%; */
  }
 
 .user-answer, .answer-feedback{
-  color: white;
+  background: rgb(51, 0, 0);
+    color: white;
+    margin-top: 20px;
+}
+#results{
+  position: relative;
+  display: inline;
+  margin: 0 auto;
+  top: 16px;
+  color: #f0f0f0;
+  font-size: 120%;
+  font-family: "Consolas", "Courier New", "Courier";
+  text-align: left;
+  transform: translateY(-50%);
+  /* white-space: nowrap; */
 }
 .answer-feedback{
-  background: aquamarine;
-  color: black;
+  background: rgba(26, 0, 0, 0.2);
+  color: #f0f0f0;
+  font-size: 120%;
+  font-family: "Consolas", "Courier New", "Courier";
+  text-align: left;
+  transform: translateY(-50%);
+  padding-left: 10px;
 }
 
 .restart-button{
+  margin-top: 200px;
   color: white;
+}
+
+#question-form{
+  /*display: grid;*/
+  /*justify-items: center;*/
+  border: 0;
+  /*grid-template-rows: 20% 20% 20% 20% 20%;*/
+  /*align-items: start;*/
+  /*justify-items: start;*/
+}
+
+.submit-button{
+      margin:0 auto;
+      margin-top: 2%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 }
 /*type-writer animation media queries*/
 @keyframes float {
   0% {
-    /*box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);*/
     transform: translatey(0px);
   }
   50% {
-    /*box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);*/
     transform: translatey(-15px);
   }
   100% {
-    /*box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);*/
     transform: translatey(0px);
   }
+}
+
+@keyframes fadeIn {
+   0% {opacity: 0;}
+   100% {opacity: 1;}
 }

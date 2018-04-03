@@ -1,3 +1,5 @@
-# Which-linux-distribution-are-you
-A quiz app to help you become more self-aware of your inner linux OS. 
+# Find-Your-Inner-Linux-Distro
+Find Your Inner Linux Distro is a quiz app built with HTML5, CSS3, JavaScript, and JQuery. 
+
+
 

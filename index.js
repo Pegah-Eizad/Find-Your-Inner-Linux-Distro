@@ -1,4 +1,4 @@
-let quizIntroText = `$ Find your inner Linux distribution [Enter/Tap to Start]?`;
+let quizIntroText = `$ Find your inner Linux distribution? [Enter/Tap to Start]`;
 let startQuizText = `$ Let's Go!`;
 let goodbyeText = `$ Goodbye!`;
 
@@ -121,7 +121,7 @@ function generateQuestion(){
 
 function generateAnswers(){
   var html = `<div class="answers">
-                <form id="question-form">`;
+                <form role="form" id="question-form">`;
        
   for (var i=0; i<dataArray[model.currentQuestion].answers.length; i++) {
     var selection = dataArray[model.currentQuestion].answers[i];

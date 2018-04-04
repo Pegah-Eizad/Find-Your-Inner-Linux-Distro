@@ -259,7 +259,7 @@ input:checked {
     color: white;
     margin-top: 20px;
 }
-#results{
+#results, #distro{
   position: relative;
   display: inline;
   margin: 0 auto;

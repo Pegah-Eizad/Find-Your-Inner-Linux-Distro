@@ -24,6 +24,7 @@ function introduceQuiz(){
   let isKeyPressed = false;
 
   $(document).on('keydown click', function (event){
+    $(document).off('keydown click');
     var keycode = (event.keyCode ? event.keyCode : event.which);
     $('.user-input-start-console').css("color", "transparent");
     if(event.which === 13 || event.which === 89 || event.which === 1){  

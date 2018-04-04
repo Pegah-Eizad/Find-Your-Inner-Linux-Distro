@@ -21,7 +21,7 @@ USER-SUMMARY:
 ![Screenshot](quiz_prompt.png)
 ![Screenshot](question_answers.png)
 ![Screenshot](answer_feedback.png)
-![Screenshot](Result.png)
+![Screenshot](result.png)
 
 ATTRIBUTION:
 -

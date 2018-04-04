@@ -18,6 +18,11 @@ USER-SUMMARY:
 - The quiz presents the user with their 'Linux distribution' result when all 10 questions have been answered. 
 - On the results page, the user has the option to retake the quiz by hittin the 'restart' button. 
 
+![Screenshot](quiz_prompt.png)
+![Screenshot](question_answers.png)
+![Screenshot](answer_feedback.png)
+![Screenshot](Result.png)
+
 ATTRIBUTION:
 -
 A significant portion of the questions are from the following:

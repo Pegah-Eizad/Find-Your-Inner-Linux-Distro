@@ -34,7 +34,6 @@ function introduceQuiz(){
       }, 1500);
     }
     else{
-      // $('.give-feedback-start-console').append('<input type="text" class="quiz-rejected" name="quiz-rejected">');
       $(document).off('keydown click');
       typeText('user-feedback-start-console', goodbyeText, 0);
     }
@@ -150,18 +149,18 @@ function calculateResults(){
   let tw = model.totalWeight;
   for(let i=0; i<results.length; i++){
     if(tw >= results[i].min && tw <= results[i].max)
-     displayResults(results[i].text);
+     displayResults(results[i].distro, results[i].text);
   }
 }
 
-function displayResults(text){
+function displayResults(distro, text){
   //inside console
   $('.console-defaults').html('Results:');
+  $('div.console-body').append('<p id="distro"></p></br>');
+  typeText('distro', distro, 0);
   $('div.console-body').append('<p id="results"></p>');
-  $('.console').height('80%');
-  typeText('results', text, 0, function(){
-    console.log('inside callback function in DISPLAYRESULTS');
-  });
+  $('.console').height('60%');
+  setTimeout(() => {typeText('results', text, 0);},1000);
   //append restart button to main, arrow fn
   setTimeout(() => {$('main').append('<div class="restart-button"><button type="submit" class="restart-button">restart</button></div>\
     <p class="source">Source: https://www.proprofs.com/quiz-school/story.php?title=Which-Linux-distribution-are-you-1</p>');}, 1000);
@@ -175,7 +174,6 @@ function optionToRestart(){
 }
 //Create Quiz
 $(document).ready(function(){
-  console.log('inside quizApp.');
   introduceQuiz();
   answerSubmit();
   nextClick();

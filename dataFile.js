@@ -1,31 +1,31 @@
 var model = {
-    currentQuestion: 0,
-    totalWeight: 0
+    currentQuestion: 10,
+    totalWeight: 30
 };
 
 const results = [
     {
         min:10,
         max:17,
-        distro: 'Ubuntu',
+        distro: '$ You are Ubuntu!',
         text: '$ You are easy-going and enjoying life. You have the attitude to stay cheerful no matter what, and count on the support of others to get you through the tough times. You\'re big on gaming and entertainment, and small on sweat. You\'ll always find yourself out of the way of the bustle of life, because you always find the best place to go and stay there. You\'re also rather easy to please.',
     },
     {
         min:18,
         max:25,
-        distro: 'Redhat',
+        distro: '$ You are Redhat!',
         text: '$ You\'re a steady learner. You can have fun like anybody else, but it\'s not a priority. You\'re also a steadfast worker proceeding at a moderate pace. You appreciate media a lot, though, and probably have all the albums by at least one band and/or at least one boxed set of DVDs. You\'re a creative force to be reckoned with. You\'re also pretty easy-going.',
     },
     {
       min:26,
       max:33,
-      distro: 'SlackWare',
+      distro: '$ You are SlackWare!',
       text: '$ You\'re extremely self-sufficient. you may not play games much and you may tune out entertainments, but you can work like the blazes and to you, creating is a game in itself. You are compelled by passion to push through projects with a drive unmatched by most. You are a master of creativity, but you also have to be in charge of my circumstances.',
     },
     {
       min:34,
       max:41,
-      distro: 'Mandriva',
+      distro: '$ You are Mandriva!',
       text: '$ You look for the quickest way to learn with the minimum of effort. You\'re a hardcore gamer and a pretty avid media fan. You can whip up a mean batch of work or create a substantial design when duty calls, but you like to get your rest, too. You keep up with the crowd without trying to get ahead. You usually look for the most comfortable set of options in life.',
     }
 ];
